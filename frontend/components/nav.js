@@ -1,35 +1,34 @@
 import React from "react"
-import Link from "next/link"
+import NLink from "next/link"
 
 const Nav = ({ categories }) => {
   return (
     <div>
-      <nav className="uk-navbar-container" data-uk-navbar>
-        <div className="uk-navbar-left">
-          <ul className="uk-navbar-nav">
-            <li>
-              <Link href="/">
-                <a>Strapi Blog</a>
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="uk-navbar-right">
-          <ul className="uk-navbar-nav">
-            {categories.map((category) => {
-              return (
-                <li key={category.id}>
-                  <Link href={`/category/${category.attributes.slug}`}>
-                    <a className="uk-link-reset">{category.attributes.name}</a>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+      <nav className="bg-navbar p-3 h-16 grid items-center">
+        <ul className="flex gap-4">
+          <Link href="/" className="text-xl text-black font-semibold">
+            Автономный логистический робот
+          </Link>
+          <Link href="/blog" className="text-xl text-black" liClass="ml-auto">
+            Блог
+          </Link>
+          <Link href="/#team" className="text-xl text-black">
+            Команда
+          </Link>
+        </ul>
       </nav>
     </div>
   )
 }
 
 export default Nav
+
+const Link = ({ href, children, liClass, ...props }) => {
+  return (
+    <li className={liClass}>
+      <NLink href={href}>
+        <a {...props}>{children}</a>
+      </NLink>
+    </li>
+  )
+}

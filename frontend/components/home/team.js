@@ -1,0 +1,43 @@
+import Image from "next/image"
+import React from "react"
+import Section from "./Section"
+
+export default function Team() {
+  return (
+    <Section color="dark" className="p-24" id="team">
+      <div className="flex items-center justify-center w-11/12 mx-auto">
+        <div className="w-1/2">
+          <h2 className="text-5xl font-bold text-white">Наша команда</h2>
+          <Card
+            className="mt-24"
+            image="/icons/fluent_hat-graduation-filled.svg"
+            title="7"
+            text="человек"
+          />
+          <Card
+            className="mt-48 pl-24 w-auto"
+            image="/icons/fluent_people-filled.svg"
+            title="1-2"
+            text="курс"
+          />
+        </div>
+        <p className="text-2xl w-1/2">
+          Мы разрабатываем автономного логистического робота грузчика на базе
+          полноуправляемого шасси. Если проще, то мы занимаемся разработкой
+          робота-ассистента для складских помещений. Почему именно такой проект?
+        </p>
+      </div>
+    </Section>
+  )
+}
+
+const Card = ({ title, text, image, className }) => {
+  return (
+    <div className={`text-navbar text-9xl font-bold flex gap-4 ${className}`}>
+      <Image src={image} width={128} height={128} alt="" />
+      <p>
+        {title} <span className="text-4xl font-semibold -ml-6">{text}</span>
+      </p>
+    </div>
+  )
+}

@@ -1,44 +1,24 @@
 import React from "react"
-import Articles from "../components/articles"
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import { fetchAPI } from "../lib/api"
+import Automation from "../components/home/automation"
+import Construction from "../components/home/construction"
+import Hero from "../components/home/hero"
+import Optimization from "../components/home/optimization"
+import Partners from "../components/home/partners"
+import Profit from "../components/home/profit"
+import Team from "../components/home/team"
 
-const Home = ({ articles, categories, homepage }) => {
+export default function Home() {
   return (
-    <Layout categories={categories}>
-      <Seo seo={homepage.attributes.seo} />
-      <div className="uk-section">
-        <div className="uk-container uk-container-large">
-          <h1>{homepage.attributes.hero.title}</h1>
-          <Articles articles={articles} />
-        </div>
-      </div>
-    </Layout>
+    <div>
+      <section className="min-h-[calc(100vh-4rem)] w-full relative grid items-center">
+        <Hero />
+      </section>
+      <Team />
+      <Automation />
+      <Profit />
+      <Optimization />
+      <Partners />
+      <Construction />
+    </div>
   )
 }
-
-export async function getStaticProps() {
-  // Run API calls in parallel
-  const [articlesRes, categoriesRes, homepageRes] = await Promise.all([
-    fetchAPI("/articles", { populate: "*" }),
-    fetchAPI("/categories", { populate: "*" }),
-    fetchAPI("/homepage", {
-      populate: {
-        hero: "*",
-        seo: { populate: "*" },
-      },
-    }),
-  ])
-
-  return {
-    props: {
-      articles: articlesRes.data,
-      categories: categoriesRes.data,
-      homepage: homepageRes.data,
-    },
-    revalidate: 1,
-  }
-}
-
-export default Home

@@ -4,6 +4,7 @@ import "../assets/css/style.css"
 import { createContext } from "react"
 import { fetchAPI } from "../lib/api"
 import { getStrapiMedia } from "../lib/media"
+import Nav from "../components/nav"
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
@@ -20,6 +21,7 @@ const MyApp = ({ Component, pageProps }) => {
         />
       </Head>
       <GlobalContext.Provider value={global.attributes}>
+        <Nav {...pageProps} />
         <Component {...pageProps} />
       </GlobalContext.Provider>
     </>
