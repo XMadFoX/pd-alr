@@ -4,8 +4,11 @@ import Section from "./Section"
 
 export default function Team() {
   return (
-    <Section color="dark" className="px-3 py-12 xl:p-24" id="team">
-      <div className="flex flex-col gap-4 xl:gap-20 xl:flex-row items-center justify-center w-11/12 mx-auto">
+    <Section color="dark" className="px-3 py-12 xl:p-24">
+      <div
+        className="flex flex-col gap-4 xl:gap-20 xl:flex-row items-center justify-center w-11/12 mx-auto"
+        id="team"
+      >
         <div className="xl:w-1/2 flex flex-col">
           <h2 className="text-5xl font-bold text-white">Наша команда</h2>
           <Card

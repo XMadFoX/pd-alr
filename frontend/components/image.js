@@ -15,6 +15,7 @@ const Image = ({ image, style }) => {
       width={width || "100%"}
       height={height || "100%"}
       objectFit="contain"
+      className="rounded-3xl"
       src={getStrapiMedia(image)}
       alt={alternativeText || ""}
     />

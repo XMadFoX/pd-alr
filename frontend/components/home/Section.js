@@ -2,7 +2,7 @@ import React from "react"
 
 export default function Section({ children, color, className }) {
   const bgColor =
-    color === "light" ? "" : color === "dark" ? "bg-[#262A2B]" : "bg-navbar"
+    color === "light" ? "" : color === "dark" ? "bg-secondary" : "bg-navbar"
   const textColor =
     color === "light"
       ? ""
