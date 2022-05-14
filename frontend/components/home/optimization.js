@@ -3,9 +3,11 @@ import Section from "./Section"
 
 export default function Optimization() {
   return (
-    <Section color="dark" className="p-24">
-      <h2 className="font-bold text-6xl mb-12 text-white">Оптимизация</h2>
-      <p className="text-2xl">
+    <Section color="dark" className="md:p-24 px-4 py-12">
+      <h2 className="font-bold text-4xl md:text-6xl mb-12 text-white">
+        Оптимизация
+      </h2>
+      <p className="text-lg md:text-2xl">
         Целью проекта является создание автономного логистический
         робота-грузчика в виде мобильной платформы на полноуправляемом шасси.
         Концепция проекта отражает развитие современной сервисной робототехники,

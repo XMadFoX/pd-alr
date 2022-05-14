@@ -3,9 +3,11 @@ import Section from "./Section"
 
 export default function Construction() {
   return (
-    <Section color="orange" className="p-24">
-      <h2 className="font-bold text-6xl mb-12">Конструкция</h2>
-      <p className="text-2xl">
+    <Section color="orange" className="px-4 py-12 md:p-24">
+      <h2 className="font-bold text-4xl md:text-6xl mb-4 md:mb-12">
+        Конструкция
+      </h2>
+      <p className="text-xl md:text-2xl">
         Теперь поговорим о конструкции робота. Главная особенность робота –
         вышеупомянутое полноуправляемое шасси. Команда в самом начале разработки
         провела анализ рынка. Мы увидели, что подавляющее большинство складских

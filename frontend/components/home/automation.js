@@ -3,9 +3,12 @@ import Section from "./Section"
 
 export default function Automation() {
   return (
-    <Section color="orange" className="flex flex-col justify-center pl-24">
-      <h2 className="font-bold text-6xl">Роботизация труда</h2>
-      <p className="max-w-xl mt-12 text-2xl">
+    <Section
+      color="orange"
+      className="flex flex-col justify-center px-4 py-12 md:pl-24"
+    >
+      <h2 className="font-bold text-4xl md:text-6xl">Роботизация труда</h2>
+      <p className="max-w-xl mt-12 text-xl md:text-2xl">
         Автоматизация и роботизация складов активно развивается во всех странах.
         Разработаны технологии, которые позволили сделать работу роботов на
         складах эффективной. Идея заменить низкоквалифицированный труд сборщиков
