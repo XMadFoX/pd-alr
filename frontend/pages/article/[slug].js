@@ -5,7 +5,8 @@ import NextImage from "../../components/image"
 import Seo from "../../components/seo"
 import { getStrapiMedia } from "../../lib/media"
 
-const Article = ({ article, categories }) => {
+const Article = ({ article }) => {
+  if (!article) return <div>Failed to fetch article</div>
   const imageUrl = getStrapiMedia(article.attributes.image)
 
   const seo = {
@@ -42,7 +43,7 @@ const Article = ({ article, categories }) => {
             </div>
             <div className="uk-width-expand">
               <p className="uk-margin-remove-bottom">
-                By {article.attributes.author.name}
+                By {article?.attributes?.author?.data?.attributes?.name}
               </p>
               <p className="uk-text-meta uk-margin-remove-top">
                 <Moment format="MMM Do YYYY">
@@ -58,14 +59,17 @@ const Article = ({ article, categories }) => {
 }
 
 export async function getStaticPaths() {
-  const articlesRes = await fetchAPI("/articles", { fields: ["slug"] })
+  const articlesRes = await fetchAPI("/articles", { fields: ["slug"] }).catch(
+    (err) => console.log(err)
+  )
 
   return {
-    paths: articlesRes.data.map((article) => ({
-      params: {
-        slug: article.attributes.slug,
-      },
-    })),
+    paths:
+      articlesRes?.data?.map((article) => ({
+        params: {
+          slug: article.attributes.slug,
+        },
+      })) || [],
     fallback: false,
   }
 }
@@ -76,12 +80,12 @@ export async function getStaticProps({ params }) {
       slug: params.slug,
     },
     populate: "*",
-  })
-  const categoriesRes = await fetchAPI("/categories")
+  }).catch((err) => console.log(err))
+  if (!articlesRes) return { props: { article: null } }
 
   return {
-    props: { article: articlesRes.data[0], categories: categoriesRes },
-    revalidate: 1,
+    props: { article: articlesRes.data[0] },
+    revalidate: 30,
   }
 }
 

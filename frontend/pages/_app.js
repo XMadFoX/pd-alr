@@ -17,10 +17,10 @@ const MyApp = ({ Component, pageProps }) => {
       <Head>
         <link
           rel="shortcut icon"
-          href={getStrapiMedia(global.attributes.favicon)}
+          href={getStrapiMedia(global?.attributes.favicon)}
         />
       </Head>
-      <GlobalContext.Provider value={global.attributes}>
+      <GlobalContext.Provider value={global?.attributes}>
         <Nav {...pageProps} />
         <Component {...pageProps} />
       </GlobalContext.Provider>
@@ -43,9 +43,9 @@ MyApp.getInitialProps = async (ctx) => {
         populate: "*",
       },
     },
-  })
+  }).catch((err) => console.log("Failed to fetch global settings", err))
   // Pass the data to our page via props
-  return { ...appProps, pageProps: { global: globalRes.data } }
+  return { ...appProps, pageProps: { global: globalRes?.data } }
 }
 
 export default MyApp

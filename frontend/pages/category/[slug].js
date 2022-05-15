@@ -2,7 +2,8 @@ import Articles from "../../components/articles"
 import { fetchAPI } from "../../lib/api"
 import Seo from "../../components/seo"
 
-const Category = ({ category, categories }) => {
+const Category = ({ category }) => {
+  if (!category) return <div>Failed to fetch</div>
   const seo = {
     metaTitle: category.attributes.name,
     metaDescription: `All ${category.attributes.name} articles`,
@@ -22,14 +23,17 @@ const Category = ({ category, categories }) => {
 }
 
 export async function getStaticPaths() {
-  const categoriesRes = await fetchAPI("/categories", { fields: ["slug"] })
+  const categoriesRes = await fetchAPI("/categories", {
+    fields: ["slug"],
+  }).catch((err) => console.log("Fail to fetch categories", err))
 
   return {
-    paths: categoriesRes.data.map((category) => ({
-      params: {
-        slug: category.attributes.slug,
-      },
-    })),
+    paths:
+      categoriesRes?.data?.map((category) => ({
+        params: {
+          slug: category.attributes.slug,
+        },
+      })) || [],
     fallback: false,
   }
 }
@@ -42,15 +46,13 @@ export async function getStaticProps({ params }) {
         populate: "*",
       },
     },
-  })
-  const allCategories = await fetchAPI("/categories")
+  }).catch((err) => console.log("Failed to fetch categories", err))
 
   return {
     props: {
       category: matchingCategories.data[0],
-      categories: allCategories,
     },
-    revalidate: 1,
+    revalidate: 30,
   }
 }
 

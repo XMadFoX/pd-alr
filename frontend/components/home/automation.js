@@ -27,14 +27,14 @@ export default function Automation() {
             alt=""
             width={32}
             height={32}
-            className="absolute mt-4 ml-6"
+            className="absolute mt-4 ml-12"
           />
           <img
             src="/logo.svg"
             alt=""
-            height={256}
-            width={256}
-            className="absolute -ml-24 mt-12"
+            height={1024}
+            width={1024}
+            className="absolute -ml-24 mt-12 h-32 md:h-auto"
           />
         </p>
       </div>
