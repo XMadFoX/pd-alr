@@ -1,16 +1,34 @@
 import App from "next/app"
 import Head from "next/head"
 import "../assets/css/style.css"
-import { createContext } from "react"
+import { createContext, useEffect, useState } from "react"
 import { fetchAPI } from "../lib/api"
 import { getStrapiMedia } from "../lib/media"
 import Nav from "../components/nav"
+import { useViewportScroll } from "framer-motion"
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({})
 
 const MyApp = ({ Component, pageProps }) => {
   const { global } = pageProps
+  const { scrollY } = useViewportScroll()
+  const [windowSize, setWindowSize] = useState()
+
+  const handleResize = () => {
+    setWindowSize({ w: window.innerWidth, h: window.innerHeight })
+  }
+
+  useEffect(() => {
+    if (!window) return
+    setWindowSize({ w: window.innerWidth, h: window.innerHeight })
+
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   return (
     <>
@@ -20,7 +38,9 @@ const MyApp = ({ Component, pageProps }) => {
           href={getStrapiMedia(global?.attributes.favicon)}
         />
       </Head>
-      <GlobalContext.Provider value={global?.attributes}>
+      <GlobalContext.Provider
+        value={{ ...global?.attributes, windowSize, scrollY }}
+      >
         <Nav {...pageProps} />
         <Component {...pageProps} />
       </GlobalContext.Provider>

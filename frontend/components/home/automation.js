@@ -1,7 +1,16 @@
-import React from "react"
+import React, { useContext } from "react"
 import Section from "./Section"
+import { motion, useTransform } from "framer-motion"
+import { GlobalContext } from "../../pages/_app"
 
 export default function Automation() {
+  const { windowSize: ws, scrollY } = useContext(GlobalContext)
+  const x1 = useTransform(
+    scrollY,
+    [ws?.h * 1, ws?.h * 2, ws?.h * 4],
+    [-500, 100, 1800]
+  )
+
   return (
     <Section
       color="orange"
@@ -19,8 +28,11 @@ export default function Automation() {
           роботов на складе выгодно.
         </p>
       </div>
-      <div className="md:w-1/2 mt-12 md:mt-24 pb-32 md:pb-auto">
-        <p className="max-w-xs p-6 bg-secondary text-white rounded-full relative ml-auto mr-4">
+      <div className="md:w-1/2 mt-12 md:mt-24 pb-32 md:pb-auto overflow-x-hidden h-[500px] border-l-2 border-secondary mb-auto">
+        <motion.p
+          style={{ x: x1 }}
+          className="max-w-xs p-6 bg-secondary text-white rounded-full relative"
+        >
           Я отнимаю работу у людей и мне не стыдно :)
           <img
             src="/bubblePart.svg"
@@ -36,7 +48,7 @@ export default function Automation() {
             width={1024}
             className="absolute -ml-24 mt-12 h-32 md:h-auto"
           />
-        </p>
+        </motion.p>
       </div>
     </Section>
   )

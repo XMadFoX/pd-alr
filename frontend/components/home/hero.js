@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import { motion, useTransform, useViewportScroll } from "framer-motion"
+import { GlobalContext } from "../../pages/_app"
 
 export default function Hero() {
-  const { scrollY, scrollYProgress } = useViewportScroll()
+  const { scrollY } = useContext(GlobalContext)
 
   const x1 = useTransform(scrollY, [0, 1000], [0, -1000])
   const y1 = useTransform(scrollY, [0, 1000], [0, -200])
