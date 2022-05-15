@@ -17,7 +17,7 @@ const Home = ({ articles, homepage }) => {
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [articlesRes, categoriesRes, homepageRes] = await Promise.all([
+  const [articlesRes, homepageRes] = await Promise.all([
     fetchAPI("/articles", { populate: "*" }).catch(() =>
       console.log("Failed to fetch articles")
     ),
@@ -29,7 +29,7 @@ export async function getStaticProps() {
     }).catch(() => console.log("Failed to fetch homepage")),
   ])
 
-  if (!articlesRes || !categoriesRes || !homepageRes)
+  if (!articlesRes || !homepageRes)
     throw new Error(`Failed to fetch blog posts. `)
 
   return {
