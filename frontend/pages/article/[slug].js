@@ -4,6 +4,7 @@ import { fetchAPI } from "../../lib/api"
 import NextImage from "../../components/image"
 import Seo from "../../components/seo"
 import { getStrapiMedia } from "../../lib/media"
+import "moment/locale/ru"
 
 const Article = ({ article }) => {
   if (!article) return <div>Failed to fetch article</div>
@@ -19,34 +20,28 @@ const Article = ({ article }) => {
   return (
     <>
       <Seo seo={seo} />
-      <div
-        id="banner"
-        className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
-        data-src={imageUrl}
-        data-srcset={imageUrl}
-        data-uk-img
-      >
-        <h1>{article.attributes.title}</h1>
-      </div>
-      <div className="uk-section">
-        <div className="uk-container uk-container-small">
+      <img className="max-h-96 bg-cover object-cover w-full" src={imageUrl} />
+      <div className="max-w-6xl mx-auto py-4 relative p-2">
+        <h1 className="text-3xl p-2 font-semibold">
+          {article.attributes.title}
+        </h1>
+        <div className="">
           <ReactMarkdown
             source={article.attributes.content}
             escapeHtml={false}
           />
-          <hr className="uk-divider-small" />
-          <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
+          <div className="absolute grid border-t-2 border-navbar p-2 px-4 w-auto mr-auto mt-4">
             <div>
-              {article.attributes.author.picture && (
-                <NextImage image={article.attributes.author.picture} />
+              {article.attributes.author.data?.attributes?.picture && (
+                <NextImage
+                  image={article.attributes.author.data?.attributes?.picture}
+                />
               )}
             </div>
-            <div className="uk-width-expand">
-              <p className="uk-margin-remove-bottom">
-                By {article?.attributes?.author?.data?.attributes?.name}
-              </p>
-              <p className="uk-text-meta uk-margin-remove-top">
-                <Moment format="MMM Do YYYY">
+            <div>
+              <p>{article?.attributes?.author?.data?.attributes?.name}</p>
+              <p>
+                <Moment format="DD MMM YYYY" locale="ru">
                   {article.attributes.published_at}
                 </Moment>
               </p>

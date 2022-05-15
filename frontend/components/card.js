@@ -5,16 +5,16 @@ import NextImage from "./image"
 const Card = ({ article }) => {
   return (
     <Link href={`/article/${article.attributes.slug}`}>
-      <a className="uk-link-reset">
-        <div className="uk-card uk-card-muted">
-          <div className="uk-card-media-top">
+      <a className="hover:text-black transition-colors duration-500">
+        <div className="relative">
+          <div className="contrast-75 hover:contrast-100 transition-[filter] duration-500">
             <NextImage image={article.attributes.image} />
           </div>
-          <div className="uk-card-body">
-            <p id="category" className="uk-text-uppercase">
+          <div className="bg-navbar absolute bottom-0 p-4 rounded-xl max-w-[60%]">
+            <p id="category" className="text-uppercase">
               {article.attributes.category.name}
             </p>
-            <p id="title" className="uk-text-large">
+            <p id="title" className="text-xl">
               {article.attributes.title}
             </p>
           </div>

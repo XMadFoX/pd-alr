@@ -5,10 +5,12 @@ import { fetchAPI } from "../lib/api"
 
 const Home = ({ articles, homepage }) => {
   return (
-    <div className="uk-section">
+    <div className="p-4 md:p-12 xl:p-24">
       <Seo seo={homepage.attributes.seo} />
-      <div className="uk-container uk-container-large">
-        <h1>{homepage.attributes.hero.title}</h1>
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-7xl font-bold text-center mb-20">
+          {homepage.attributes.hero.title}
+        </h1>
         <Articles articles={articles} />
       </div>
     </div>

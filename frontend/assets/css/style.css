@@ -1,7 +1,28 @@
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
   scroll-behavior: smooth;
+}
+
+iframe[src*="youtube"] {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 1rem;
 }

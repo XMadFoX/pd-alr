@@ -41,7 +41,7 @@ export default function Hero() {
         }}
       />
       <motion.h1
-        className="absolute z-20 ml-[5%] bottom-[20vh] bg-navbar rounded-xl p-4 text-4xl font-bold max-w-xs"
+        className="absolute z-20 ml-[5%] bottom-[20vh] bg-navbar rounded-xl p-8 text-4xl font-bold max-w-sm"
         initial="hidden"
         animate="visible"
         style={{ y: y2, scale: s2 }}
