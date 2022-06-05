@@ -20,7 +20,13 @@ const Article = ({ article }) => {
   return (
     <>
       <Seo seo={seo} />
-      <img className="max-h-96 bg-cover object-cover w-full" src={imageUrl} />
+      {imageUrl && (
+        <img
+          className="max-h-96 bg-cover object-cover w-full"
+          alt=""
+          src={imageUrl}
+        />
+      )}
       <div className="max-w-6xl mx-auto py-4 relative p-2">
         <h1 className="text-3xl p-2 font-semibold">
           {article.attributes.title}
